@@ -3,18 +3,24 @@ const { logger } = require("./util/logger");
 const shoppingList = [];
 
 function addItem(name, price) {
+
+  // constructor for new item that will be added
   const newItem = {
     name,
+    // uses price from request body
     price: parseFloat(price).toFixed(2),
     purchased: false,
   };
+  // push the newItem object into the shopping list array
   shoppingList.push(newItem);
   logger.info(`Added item: ${newItem.name}`);
   return `"${name} has been added to the shopping list!`;
 }
 
 function togglePurchased(index) {
+  // conditional to check tht the index provided in the request url exists in the current shoppinglist array
   if (index >= 0 && index < shoppingList.length) {
+    // if it does, then change the purchased property boolean value of that index to the opposite value 
     shoppingList[index].purchased = !shoppingList[index].purchased;
     logger.info(
       `Toggle Purchased: ${shoppingList[index].name}: ${shoppingList[index].purchased}`
